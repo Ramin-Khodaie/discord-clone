@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
   return (
     <div className="p-9">
       <p className="text-2xl font-bold text-indigo-400">
         <UserButton afterSignOutUrl="/" />
+        <ModeToggle />
       </p>
     </div>
   );
 }
+
