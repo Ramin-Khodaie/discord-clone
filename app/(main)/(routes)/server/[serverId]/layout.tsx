@@ -6,7 +6,7 @@ import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const ServerIdPage = async ({
+const ServerIdLayout = async ({
   children,
   params,
 }: {
@@ -30,10 +30,13 @@ const ServerIdPage = async ({
 
   if (!server) redirect("/");
   return (
-    <div>
-        Server id page
+    <div className="h-full">
+      <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
+        <ServerSidebar serverId = {params.serverId}/>
+      </div>
+      <main className="h-full md:pl-60">{children || 'serverid page'}</main>
     </div>
   );
 };
 
-export default ServerIdPage;
+export default ServerIdLayout;
