@@ -10,7 +10,6 @@ interface InviteCodePageProps {
 
 const InviteCodePage = async ({ params }: InviteCodePageProps) => {
   const profile = await currentProfile();
-  console.log("🚀 ~ file: page.tsx:13 ~ InviteCodePage ~ profile:", profile)
 
   if (!profile) return redirect("/");
 
@@ -26,30 +25,28 @@ const InviteCodePage = async ({ params }: InviteCodePageProps) => {
       },
     },
   });
-  console.log("🚀 ~ file: page.tsx:28 ~ InviteCodePage ~ existingServer:", existingServer)
 
   if (existingServer) return redirect(`/servers/${existingServer.id}`);
 
-//   const server = await db.server.update({
-//     //@ts-ignore
-//     where: {
-//       inviteCode: params.inviteCode,
-//     },
-//     data: {
-//       members: {
-//         create: [
-//           {
-//             name: profile.name,
-//             profileId: profile.id,
-//           },
-//         ],
-//       },
-//     },
-//   });
+  const server = await db.server.update({
+    where: {
+      inviteCode: params.inviteCode,
+    },
+    data: {
+      members: {
+        create: [
+          {
+            name: profile.name,
+            profileId: profile.id,
+          },
+        ],
+      },
+    },
+  });
 
-//   if (server) {
-//     return redirect(`/servers/${server.id}`);
-//   }
+  if (server) {
+    return redirect(`/servers/${server.id}`);
+  }
 
   return null;
 };
