@@ -17,7 +17,7 @@ const ServerSidebar = async ({ serverId }: ServerSideProps) => {
       id: serverId,
     },
     include: {
-      Channels: {
+      channels: {
         orderBy: {
           createdAt: "asc",
         },
@@ -33,13 +33,13 @@ const ServerSidebar = async ({ serverId }: ServerSideProps) => {
     },
   });
 
-  const textChannel = server?.Channels.filter(
+  const textChannel = server?.channels.filter(
     (channel) => channel.type === ChannelType.TEXT
   );
-  const audioChannel = server?.Channels.filter(
+  const audioChannel = server?.channels.filter(
     (channel) => channel.type === ChannelType.AUDIO
   );
-  const videoChannel = server?.Channels.filter(
+  const videoChannel = server?.channels.filter(
     (channel) => channel.type === ChannelType.VIDEO
   );
 
@@ -47,10 +47,12 @@ const ServerSidebar = async ({ serverId }: ServerSideProps) => {
 
   if (!server) return redirect("/");
 
-  const role = server?.members.find((member) => member.profileId === profile.id)?.role;
+  const role = server?.members.find(
+    (member) => member.profileId === profile.id
+  )?.role;
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#2b2d31] bg-[#f2f3f5]">
-      <ServerHeader server={server} role={role}/>
+      <ServerHeader server={server} role={role} />
     </div>
   );
 };

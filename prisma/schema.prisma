@@ -40,7 +40,7 @@ model Server {
   updatedAt DateTime @updatedAt
 
   members  Member[]
-  Channels Channel[]
+  channels Channel[]
 
   @@index([profileId])
 }
