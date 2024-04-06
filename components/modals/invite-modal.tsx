@@ -20,6 +20,8 @@ const InviteModal = () => {
   const { isOpen, onOpen, data, onClose, type } = useModal();
   const origin = useOrigin();
 
+  const isModalOpen = isOpen && type === "invite";
+
   const inviteUrl = `${origin}/invite/${data.server?.inviteCode}`;
 
   const [copied, setCopied] = useState(false);
@@ -36,8 +38,8 @@ const InviteModal = () => {
   const handleNewInviteCode = async () => {
     try {
       setIsLoading(true);
-      const response = await newCode(data.server?.id as string);     
-      onOpen('invite', {server: response})
+      const response = await newCode(data.server?.id as string);
+      onOpen("invite", { server: response });
     } catch (error) {
       console.log(error);
     } finally {
@@ -45,7 +47,7 @@ const InviteModal = () => {
     }
   };
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">

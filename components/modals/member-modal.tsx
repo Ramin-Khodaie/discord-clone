@@ -54,6 +54,8 @@ const MemberModal = () => {
 
   const router = useRouter();
 
+  const isModalOpen = isOpen && type === "member";
+
   const { server } = data as { server: ServerWithMembersWithProfiles };
 
   const onKick = async (memberId: string) => {
@@ -94,7 +96,7 @@ const MemberModal = () => {
   };
   if (!server) return null;
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
